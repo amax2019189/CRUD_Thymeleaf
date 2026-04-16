@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        .titulo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .btn-nuevo {
+            background-color: #01415B;
+            color: white;
+        }
+
+        .btn-editar {
+            background-color: #01415B;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+
+        .btn-eliminar {
+            background-color: #01415B;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="titulo">Lista de Usuarios</h1>
+
+    <a th:href="@{/usuarios/nuevo}" class="btn btn-nuevo">Nuevo Usuario</a>
+
+    <table>
+         <thead>
+         <tr>
+             <th>ID</th>
+             <th>NOMBRE</th>
+             <th>APELLIDO</th>
+             <th>EDAD</th>
+         </tr>
+         </thead>
+        <tbody>
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.idUsuario}"></td>
+            <td th:text="${usuario.nombreUsuario}"></td>
+            <td th:text="${usuario.apellidoUsuario}"></td>
+            <td th:text="${usuario.edadUsuario}"></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${modoEdicion} ? 'Editar Usuario' : 'Nuevo Usuario'"></title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .acciones {
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-guardar {
+            background-color: #01415B;
+            color: white;
+        }
+
+        .btn-volver {
+            text-decoration: none;
+            margin-left: 10px;
+            background-color: #01415B;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Nuevo Usuario</h1>
+
+
+        <form th:action="@{/usuarios/guardar}"
+              th:object="${usuario}"
+              method="post">
+
+            <div class="campo">
+                <label for="nombreUsuario">Nombre</label>
+                <input type="text" id="nombreUsuario" th:field="*{nombreUsuario}">
+                <div class="error"
+                     th:if="${#fields.hasErrors('nombreUsuario')}"
+                     th:errors="*{nombreUsuario}"></div>
+            </div>
+
+            <div class="campo">
+                <label for="apellidoUsuario">Apellido</label>
+                <input type="text" id="apellidoUsuario" th:field="*{apellidoUsuario}">
+                <div class="error"
+                     th:if="${#fields.hasErrors('apellidoUsuario')}"
+                     th:errors="*{apellidoUsuario}"></div>
+            </div>
+
+            <div class="campo">
+                <label for="edadUsuario">Edad</label>
+                <input type="text" id="edadUsuario" th:field="*{edadUsuario}">
+                <div class="error"
+                     th:if="${#fields.hasErrors('edadUsuario')}"
+                     th:errors="*{edadUsuario}"></div>
+            </div>
+
+            <div class="acciones">
+                <button type="submit" class="btn btn-guardar">
+                    Guardar
+                </button>
+
+                <a th:href="@{/usuarios}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
