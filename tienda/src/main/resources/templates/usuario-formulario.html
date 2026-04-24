@@ -80,10 +80,9 @@
 
     <div class="container">
 
-        <h1>Nuevo Usuario</h1>
+        <h1 th:text="${modoEdicion} ? 'Editar Usuario' : 'Guardar Usuario'"></h1>
 
-
-        <form th:action="@{/usuarios/guardar}"
+        <form th:action="${modoEdicion} ? @{/usuarios/actualizar/{id}(id=${usuario.idUsuario})} : @{/usuarios/guardar}"
               th:object="${usuario}"
               method="post">
 
@@ -112,11 +111,12 @@
             </div>
 
             <div class="acciones">
-                <button type="submit" class="btn btn-guardar">
-                    Guardar
+                <button type="submit"
+                        class="btn btn-guardar"
+                        th:text="${modoEdicion} ? 'Editar' : 'Guardar'">
                 </button>
 
-                <a th:href="@{/usuarios}">Cancelar</a>
+                <a class="btn btn-guardar" th:href="@{/usuarios}">Cancelar</a>
             </div>
         </form>
     </div>

@@ -52,4 +52,46 @@ public class UsuarioController {
         usuarioService.crear(usuario);
         return "redirect:/usuarios";
     }
+
+    //Método para buscar por ID
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditar(@PathVariable
+                                              @Min(value = 1,message = "El ID debe ser mayor o igual a 1.")
+                                              Integer id,
+                                          Model model) {
+
+        Usuario usuario = usuarioService.obtenerPorId(id);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("modoEdicion", true);
+        return "usuario-formulario";
+    }
+
+    //Método para actualizar un registro
+    @PostMapping("/actualizar/{id}")
+    public String actualizar(@PathVariable
+                             @Min(value = 1, message = "El ID debe ser mayor o igual a 1.")
+                             Integer id,
+                             Usuario usuario,
+                             Model model,
+                             BindingResult result) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("modoEdicion", true);
+            return "usuario-formulario";
+        }
+
+        usuarioService.actualizar(id, usuario);
+        return "redirect:/usuarios";
+
+    }
+
+    //Método para eliminar un registro
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable
+                           @Min(value = 1, message = "El ID debe ser mayor o igual a 1.")
+                           Integer id) {
+
+        usuarioService.eliminar(id);
+        return "redirect:/usuarios";
+    }
 }

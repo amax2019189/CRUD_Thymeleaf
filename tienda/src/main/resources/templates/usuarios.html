@@ -77,6 +77,7 @@
              <th>NOMBRE</th>
              <th>APELLIDO</th>
              <th>EDAD</th>
+             <th>BOTONES</th>
          </tr>
          </thead>
         <tbody>
@@ -85,6 +86,14 @@
             <td th:text="${usuario.nombreUsuario}"></td>
             <td th:text="${usuario.apellidoUsuario}"></td>
             <td th:text="${usuario.edadUsuario}"></td>
+            <td>
+                <a th:href="@{/usuarios/editar/{id}(id=${usuario.idUsuario})}" class="btn-editar">Editar</a>
+                <a th:href="@{/usuarios/eliminar/{id}(id=${usuario.idUsuario})}"
+                   class="btn-eliminar"
+                   onclick="return confirm('¿Seguro que desea eliminar el registro?')">
+                    Eliminar
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
